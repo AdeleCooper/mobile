@@ -90,7 +90,6 @@ export class IdeasProvider {
         .catch((error: any) => {
           reject(error);
         });
-
     });
   }
 

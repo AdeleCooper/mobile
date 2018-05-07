@@ -7,15 +7,75 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title>comparison</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Video Comparison</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="grey">
+  <ion-grid>
+
+
+
+    <ion-row>
+      <ion-col>
+
+        <ion-row>
+          <p>Thumbnail</p>
+        </ion-row>
+        <ion-row>
+          <p>Title</p>
+        </ion-row>
+        <ion-row>
+          <p>Views</p>
+        </ion-row>
+        <ion-row>
+          <p>Likes</p>
+        </ion-row>
+        <ion-row>
+          <p>Dislikes</p>
+        </ion-row>
+        <ion-row>
+          <p>Comments</p>
+        </ion-row>
+
+      </ion-col>
+      <ion-col class="col" *ngFor="let video of videoData">
+
+        <ion-row class="row">
+          <img src="{{video.snippet.thumbnails.default.url}}">
+        </ion-row>
+
+        <ion-row>
+          <p>{{video.snippet.title}}</p>
+        </ion-row>
+
+        <ion-row>
+          <p>{{video.statistics.viewCount}}</p>
+        </ion-row>
+
+        <ion-row>
+          <p>{{video.statistics.likeCount}}</p>
+          <img class="thumbs" src="http://www.clker.com/cliparts/P/S/9/I/l/S/234-ed-s-sd-md.png" alt="thumbsup">
+        </ion-row>
+
+        <ion-row>
+          <p>{{video.statistics.dislikeCount}}</p>
+          <img class="thumbs" src="http://www.derbycitypetsits.com/wp-content/uploads/2015/06/Thumbs-Down-300x300.png" alt="thumbsdown">
+        </ion-row>
+
+        <ion-row>
+          <p>{{video.statistics.commentCount}}</p>
+        </ion-row>
+
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>

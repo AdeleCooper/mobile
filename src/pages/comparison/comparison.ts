@@ -20,6 +20,8 @@ export class ComparisonPage {
   videos: Observable<any[]>;
   video: Observable<any>;
   videoList: any = [];
+  videoData: any = [];
+  thumbnails: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public youtubeProvider: YoutubeProvider) {
     this.channelId = this.navParams.get('channelId');
@@ -46,9 +48,13 @@ export class ComparisonPage {
   }
 
   getVideoStats(videoId){
+    var self = this;
     this.video = this.youtubeProvider.getVideoStats(videoId);
     this.video.subscribe(data => {
       console.log("data: ", data[0].snippet.thumbnails.high.url);
+      this.videoData.push(data[0]);
+      this.thumbnails.push(data[0].snippet.thumbnails.high.url);
+      console.log(this.videoData);
     },err => {
       console.log("ERROR!!!");
     })
