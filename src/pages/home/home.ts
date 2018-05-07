@@ -72,8 +72,10 @@ export class HomePage {
         if(!data){
           return;
         } else {
-          //this.ideasProvider.addIdea()
-
+          self.ideasProvider.addIdea(data, self.uid).then(((docRef) => {
+            self.ideas.push({ideaID: docRef.id, idea: data});
+          }))
+          //need to push new object onto ideas - docRef.id and the data as an object
         }
 
       })
@@ -81,8 +83,21 @@ export class HomePage {
   }
 
   editIdea(idea){
-    var formParams = { Idea: idea };
+    var formParams = { "Idea": idea.idea };
     console.log("edit me!");
+    console.log(formParams);
+    let modal = this.modalCtrl.create(EditIdeasPage, formParams);
+    var self = this;
+    modal.onDidDismiss(data => {
+      console.log("close modal");
+      if(!data){
+        return;
+      } else {
+        self.ideasProvider.editIdea(data, self.uid, idea.ideaID);
+      }
+    })
+
+    modal.present();
   }
 
 }

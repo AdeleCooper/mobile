@@ -37,7 +37,8 @@
         </ion-col>
       </ion-row>
     </div>
-
+    <p class="vidideas">Video Ideas</p>
+  <button ion-button (click)="addIdea()">Add Idea</button>
     <ion-row>
       <ion-item *ngFor="let idea of ideas" (click)="editIdea(idea)">
         <p>{{idea.idea.Title}}</p>
@@ -48,6 +49,6 @@
 
   </ion-grid>
 
-  <button colour="danger" (click)="addIdea()">Add Idea</button>
+
 
 </ion-content>

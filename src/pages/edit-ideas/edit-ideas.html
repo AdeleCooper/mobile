@@ -7,46 +7,91 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Add Idea</ion-title>
+    <ion-title>{{title}}</ion-title>
     <ion-buttons start>
-        <button ion-button color="dark" (click)="dismiss()">
-          <span ion-text color="primary" showWhen="ios">Cancel</span>
-          <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button ion-button color="dark" (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-    <form (ngSubmit)="addIdea()">
+<ion-content padding class="form-content">
+  <form (ngSubmit)="saveIdea()" class="form">
+
+
+    <ion-item>
+      <ion-label>Title:</ion-label>
+      <ion-input type="text" [(ngModel)]="idea.Title" name="Title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="label" >Publish Date:</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="idea.PublishDate" name="PublishDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>Budget:</ion-label>
+        <ion-input type="text" [(ngModel)]="idea.Budget" name="Budget"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type:</ion-label>
+        <ion-input type="text" [(ngModel)]="idea.Type" name="Type"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Theme:</ion-label>
+        <ion-input type="text" [(ngModel)]="idea.Theme" name="Theme"></ion-input>
+      </ion-item>
+      <p class="divider"></p>
+    <p class="divide">Progress</p>
+    <ion-item>
+      <ion-checkbox [(ngModel)]="idea.Filmed" name="filmed"></ion-checkbox>
+      <ion-label>Filmed?</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-checkbox class="checkbox" [(ngModel)]="idea.Edited" name="edited"></ion-checkbox>
+        <ion-label>Edited?</ion-label>
+      </ion-item>
+    <p class="divide">Social Media Promotion</p>
+    <ion-item>
+      <ion-checkbox [(ngModel)]="idea.Twitter" name="twitter"></ion-checkbox>
+      <ion-label>Twitter</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-checkbox [(ngModel)]="idea.Instagram" name="instagram"></ion-checkbox>
+        <ion-label>Instagram</ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-checkbox [(ngModel)]="idea.Facebook" name="facebook"></ion-checkbox>
+          <ion-label>Facebook</ion-label>
+        </ion-item>
+        <p class="divide">Revenue</p>
         <ion-item>
-          <ion-label>Title</ion-label>
-          <ion-input type="text" [(ngModel)]="idea.Title" name="Title"></ion-input>
+          <ion-checkbox [(ngModel)]="idea.BrandDeal" name="branddeal"></ion-checkbox>
+          <ion-label>Brand Deal?</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Start Date</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="idea.StartDate" name="StartDate"></ion-datetime>
+            <ion-checkbox [(ngModel)]="idea.Monetization" name="monetization"></ion-checkbox>
+            <ion-label>Monetised?</ion-label>
+          </ion-item>
+
+          <p class="divider"></p>
+    <ion-item>
+      <ion-label>Equipment:</ion-label>
+      <ion-textarea [(ngModel)]="idea.Equipment" name="equipment"></ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-label>Description:</ion-label>
+        <ion-textarea [(ngModel)]="idea.Description" name="Description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+          <ion-label>Tags:</ion-label>
+          <ion-textarea [(ngModel)]="idea.Tags" name="Tags"></ion-textarea>
         </ion-item>
-        <ion-item>
-          <ion-label>End Date</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="idea.EndDate" name="EndDate"></ion-datetime>
-        </ion-item>
-        <ion-item>
-          <ion-label>Notes</ion-label>
-          <ion-textarea [(ngModel)]="idea.Notes" name="Notes"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-label>Status</ion-label>
-          <ion-select [(ngModel)]="idea.Status" name="Status">
-            <ion-option value="Planned">Planned</ion-option>
-            <ion-option value="InProgress">In Progress</ion-option>
-            <ion-option value="Completed">Completed</ion-option>
-          </ion-select>
-        </ion-item>
-        <button ion-button type="submit" block>Save</button>
-      </form>
-    
+    <button ion-button type="submit" block>Save</button>
+  </form>
+
 
 </ion-content>

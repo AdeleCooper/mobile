@@ -34,7 +34,7 @@ export class EditIdeasPage {
     console.log('ionViewDidLoad EditIdeasPage');
   }
 
-  addIdea() {
+  saveIdea() {
     this.viewCtrl.dismiss(this.idea);
   }
 

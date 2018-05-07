@@ -63,11 +63,37 @@ export class IdeasProvider {
 }
 
 
-  addIdea(data, ): Promise<any> {
+  addIdea(data, uid): Promise<any> {
     return new Promise((resolve, reject) => {
+      JSON.stringify(data);
+      // Adds new idea to Ideas collection
+      this.db.collection("Users").doc(uid).collection("Ideas").add(data)
+        .then(function (docRef) {
+          console.log(docRef.id);
+          resolve(docRef);
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
 
-    })
+    });
   }
+
+  editIdea(data, uid, ideaID): Promise<any> {
+    return new Promise((resolve, reject) => {
+      JSON.stringify(data);
+      // Adds new idea to Ideas collection
+      this.db.collection("Users").doc(uid).collection("Ideas").doc(ideaID).set(data)
+        .then(function () {
+          resolve();
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
+
+    });
+  }
+
 
 
 }
