@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ToastController } from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
-import { AngularFireAuth } from 'angularfire2/auth';
+ import { AngularFireAuth } from 'angularfire2/auth';
 import { UsersProvider } from '../../providers/users/users';
 /**
  * Generated class for the StartPage page.

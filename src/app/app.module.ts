@@ -15,6 +15,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import firebase from "firebase";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { IdeasProvider } from '../providers/ideas/ideas';
 import { YoutubeProvider } from '../providers/youtube/youtube';
 import { UsersProvider } from '../providers/users/users';
@@ -42,7 +45,11 @@ import { UsersProvider } from '../providers/users/users';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(config),
+    AngularFireModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

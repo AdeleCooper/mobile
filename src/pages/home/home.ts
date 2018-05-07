@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import {IdeasProvider} from '../../providers/ideas/ideas';
 import {YoutubeProvider} from '../../providers/youtube/youtube';
 import {Observable} from 'rxjs/Observable';
+import { EditIdeasPage } from '../edit-ideas/edit-ideas';
 
 /**
  * Generated class for the HomePage page.
@@ -19,8 +20,13 @@ import {Observable} from 'rxjs/Observable';
 export class HomePage {
   channel: Observable<any>;
   channelId: any;
+  title: any;
+  profilePicture = "https://www.impactnyc.org/wp-content/uploads/2018/02/missing-image-avatar.png";
+  subscriberCount: any;
+  videoCount: any;
+  viewCount: any;
 
-  constructor(public ideasProvider: IdeasProvider, public youtubeProvider: YoutubeProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public ideasProvider: IdeasProvider, public youtubeProvider: YoutubeProvider, public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     this.channelId = this.navParams.get('channelId');
     this.getIdeas();
     this.getChannelStats();
@@ -35,39 +41,29 @@ export class HomePage {
   }
 
   getChannelStats(){
+    var self = this;
     this.channel = this.youtubeProvider.getChannel(this.channelId);
     this.channel.subscribe(data => {
       console.log('data: ',data);
+      self.title = data[0].snippet.title;
+      self.profilePicture = data[0].snippet.thumbnails.high.url;
+      self.subscriberCount = data[0].statistics.subscriberCount;
+      self.videoCount = data[0].statistics.videoCount;
+      self.viewCount = data[0].statistics.viewCount;
     },err => {
       console.log("ERROR!!!");
     }
   )
   }
 
-  // getRecentVideos(){
-  //   this.videos = this.youtubeProvider.getRecentVideos(this.channelId);
-  //   this.videos.subscribe(data => {
-  //    console.log('data: ',data);
-  //    this.videoList.push(data[0]);
-  //    this.videoList.push(data[1]);
-  //    console.log(this.videoList);
-  //    this.videoList.forEach(element => {
-  //      this.getVideoStats(element.id.videoId);
-  //    });
-     
-  //  },err => {
-  //    console.log("ERROR!!!");
-  //  })
-  // }
+  addIdea(): void{
+      let modal = this.modalCtrl.create(EditIdeasPage);
+      var self = this;
 
-
-  // getVideoStats(videoId){
-  //   this.video = this.youtubeProvider.getVideoStats(videoId);
-  //   this.video.subscribe(data => {
-  //     console.log("data: ", data[0].snippet.thumbnails.high.url);
-  //   },err => {
-  //     console.log("ERROR!!!");
-  //   })
-  // }
+      modal.onDidDismiss(data => {
+        console.log("close modal");
+      })
+      modal.present();
+  }
 
 }

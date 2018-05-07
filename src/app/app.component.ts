@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 import { HomePage } from '../pages/home/home';
@@ -19,7 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public events: Events) {
+  constructor(public platform: Platform, public events: Events, public afAuth: AngularFireAuth) {
     this.initializeApp();
     var self = this;
     this.events.subscribe('channelId:changed', (data) => {
@@ -45,5 +46,15 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
 
     this.nav.setRoot(page.component, {channelId: this.channelId});
+  }
+
+  logOut() {
+    var self = this;
+    this.afAuth.auth.signOut().then(function () {
+      // Sign-out successful.
+      self.nav.setRoot(StartPage);
+    }, function (error) {
+      console.log("Log out error: " + error);
+    });
   }
 }
