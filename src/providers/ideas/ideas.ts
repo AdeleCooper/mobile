@@ -18,25 +18,55 @@ export class IdeasProvider {
     this.db = firebase.firestore();
   }
 
-  getIdeas(): Promise<any> {
-      return new Promise((resolve, reject) => {
-        this.db
-          .collection("Ideas")
-          .doc("GhZseUZwOh0TC6dboJ9g")
-          .get()
-          .then((doc: any) => {
-            if (doc.exists) {
-              resolve(doc);
-              console.log(doc.data());
-            } else {
-              reject("Task doesn't exist");
-            }
-          })
-          .catch((error: any) => {
-            console.log(error);
-            reject(error);
+  // getIdeas1(): Promise<any> {
+  //     return new Promise((resolve, reject) => {
+  //       this.db
+  //         .collection("Ideas")
+  //         .doc("GhZseUZwOh0TC6dboJ9g")
+  //         .get()
+  //         .then((doc: any) => {
+  //           if (doc.exists) {
+  //             resolve(doc);
+  //             console.log(doc.data());
+  //           } else {
+  //             reject("Task doesn't exist");
+  //           }
+  //         })
+  //         .catch((error: any) => {
+  //           console.log(error);
+  //           reject(error);
+  //         });
+  //     });
+  // }
+
+  getIdeas(uid): Promise<any> {
+    return new Promise((resolve, reject) => {
+      var ideas = [];
+      this.db
+        .collection("Users")
+        .doc(uid)
+        .collection("Ideas")
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+              ideas.push({ideaID: doc.id, idea: doc.data()});
           });
-      });
+          resolve(ideas);
+      })
+        .catch((error: any) => {
+          console.log(error);
+          reject(error);
+        });
+    });
+}
+
+
+  addIdea(data, ): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+    })
   }
 
 

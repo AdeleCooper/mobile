@@ -20,5 +20,33 @@
 
 
 <ion-content padding>
+    <form (ngSubmit)="addIdea()">
+        <ion-item>
+          <ion-label>Title</ion-label>
+          <ion-input type="text" [(ngModel)]="idea.Title" name="Title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="idea.StartDate" name="StartDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>End Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="idea.EndDate" name="EndDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Notes</ion-label>
+          <ion-textarea [(ngModel)]="idea.Notes" name="Notes"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-select [(ngModel)]="idea.Status" name="Status">
+            <ion-option value="Planned">Planned</ion-option>
+            <ion-option value="InProgress">In Progress</ion-option>
+            <ion-option value="Completed">Completed</ion-option>
+          </ion-select>
+        </ion-item>
+        <button ion-button type="submit" block>Save</button>
+      </form>
+    
 
 </ion-content>

@@ -38,6 +38,14 @@
       </ion-row>
     </div>
 
+    <ion-row>
+      <ion-item *ngFor="let idea of ideas" (click)="editIdea(idea)">
+        <p>{{idea.idea.Title}}</p>
+
+      </ion-item>
+
+    </ion-row>
+
   </ion-grid>
 
   <button colour="danger" (click)="addIdea()">Add Idea</button>

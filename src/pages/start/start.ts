@@ -42,11 +42,13 @@ export class StartPage {
       var uid = result.uid;
       this.usersProvider.getUser(uid).then((doc) => {
         var dataReturned = doc.data();
+        console.log(dataReturned);
         var data = {
-          channelId: dataReturned.ChannelID
+          channelId: dataReturned.ChannelID,
+          userId: uid
         }
         self.events.publish('channelId:changed', {'channelId': dataReturned.ChannelID });
-        self.navCtrl.setRoot(HomePage, {channelId: dataReturned.ChannelID});
+        self.navCtrl.setRoot(HomePage, data);
       });
     } catch (e) {
       this.errorMessage = e.message;

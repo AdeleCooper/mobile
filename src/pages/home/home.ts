@@ -25,9 +25,12 @@ export class HomePage {
   subscriberCount: any;
   videoCount: any;
   viewCount: any;
+  uid: any;
+  ideas: any;
 
   constructor(public ideasProvider: IdeasProvider, public youtubeProvider: YoutubeProvider, public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams) {
     this.channelId = this.navParams.get('channelId');
+    this.uid = this.navParams.get('userId');
     this.getIdeas();
     this.getChannelStats();
   }
@@ -37,7 +40,11 @@ export class HomePage {
   }
 
   getIdeas(){
-    this.ideasProvider.getIdeas();
+    var self = this;
+    this.ideasProvider.getIdeas(this.uid).then((ideas) => {
+      console.log(ideas);
+      self.ideas = ideas;
+    });
   }
 
   getChannelStats(){
@@ -62,8 +69,20 @@ export class HomePage {
 
       modal.onDidDismiss(data => {
         console.log("close modal");
+        if(!data){
+          return;
+        } else {
+          //this.ideasProvider.addIdea()
+
+        }
+
       })
       modal.present();
+  }
+
+  editIdea(idea){
+    var formParams = { Idea: idea };
+    console.log("edit me!");
   }
 
 }
